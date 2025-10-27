@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutebolWall - Temas e Papéis de Parede dos Times Brasileiros</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #1a202c;
+            min-height: 100vh;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #009639 0%, #ffdf00 100%);
+            color: #1a202c;
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #1a202c;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 2rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #1a202c;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            background: white;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #009639;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cart-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cart-btn {
+            background: #1a202c;
+            border: 2px solid #1a202c;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .cart-btn:hover {
+            background: transparent;
+            color: #1a202c;
+        }
+
+        .cart-count {
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Categories */
+        .categories {
+            background: rgba(255,255,255,0.95);
+            padding: 1rem 0;
+            border-bottom: 2px solid #009639;
+            backdrop-filter: blur(10px);
+        }
+
+        .categories-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            padding: 0 2rem;
+            overflow-x: auto;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid #009639;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            color: #009639;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: #009639;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: rgba(255,255,255,0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            height: fit-content;
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .filter-section:last-child {
+            border-bottom: none;
+        }
+
+        .filter-title {
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #1a202c;
+            font-size: 1.1rem;
+        }
+
+        .price-range {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .price-input {
+            width: 80px;
+            padding: 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
+
+        .filter-checkbox {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .filter-checkbox label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .filter-checkbox label:hover {
+            background: #f7fafc;
+        }
+
+        /* Products Grid */
+        .products-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #009639;
+        }
+
+        .products-header h2 {
+            color: #1a202c;
+            margin: 0;
+        }
+
+        .sort-select {
+            padding: 0.75rem;
+            border: 2px solid #009639;
+            border-radius: 8px;
+            background: white;
+            color: #1a202c;
+            font-weight: bold;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: white;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border-color: #009639;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #f7fafc, #edf2f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-colors {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            display: flex;
+        }
+
+        .color-stripe {
+            flex: 1;
+            height: 100%;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #1a202c;
+            font-size: 1.1rem;
+        }
+
+        .product-team {
+            color: #009639;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        .product-specs {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background: #009639;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: #007a2f;
+            transform: translateY(-2px);
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+        }
+
+        .cart-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #009639;
+            padding-bottom: 1rem;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #718096;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f7fafc;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-team {
+            color: #009639;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-price {
+            color: #1a202c;
+            font-weight: bold;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0 1rem;
+        }
+
+        .qty-btn {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .cart-total {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #009639;
+        }
+
+        .total-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkout-btn {
+            background: #009639;
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background: #007a2f;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .search-bar {
+                margin: 0;
+                max-width: none;
+            }
+
+            .categories-container {
+                padding: 0 1rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                ⚽ FutebolWall
+            </div>
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Buscar por time ou produto..." id="searchInput">
+                <button class="search-btn" onclick="searchProducts()">🔍</button>
+            </div>
+            <div class="cart-info">
+                <button class="cart-btn" onclick="toggleCart()">
+                    🛒 Carrinho
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Categories -->
+    <div class="categories">
+        <div class="categories-container">
+            <button class="category-btn active" onclick="filterByCategory('todos')">🏆 Todos os Times</button>
+            <button class="category-btn" onclick="filterByCategory('flamengo')">🔴⚫ Flamengo</button>
+            <button class="category-btn" onclick="filterByCategory('corinthians')">⚫⚪ Corinthians</button>
+            <button class="category-btn" onclick="filterByCategory('palmeiras')">🟢⚪ Palmeiras</button>
+            <button class="category-btn" onclick="filterByCategory('sao-paulo')">🔴⚫⚪ São Paulo</button>
+            <button class="category-btn" onclick="filterByCategory('santos')">⚫⚪ Santos</button>
+            <button class="category-btn" onclick="filterByCategory('vasco')">⚫⚪ Vasco</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="filter-section">
+                <div class="filter-title">💰 Filtrar por Preço</div>
+                <div class="price-range">
+                    <input type="number" class="price-input" placeholder="Min" id="minPrice">
+                    <span>-</span>
+                    <input type="number" class="price-input" placeholder="Max" id="maxPrice">
+                </div>
+                <button class="add-to-cart" onclick="applyPriceFilter()" style="margin-top: 1rem;">Aplicar</button>
+            </div>
+            
+            <div class="filter-section">
+                <div class="filter-title">📱 Tipo de Produto</div>
+                <div class="filter-checkbox">
+                    <label><input type="checkbox" onchange="filterByType('papel-parede')"> 🖼️ Papel de Parede</label>
+                    <label><input type="checkbox" onchange="filterByType('tema-completo')"> 🎨 Tema Completo</label>
+                    <label><input type="checkbox" onchange="filterByType('icones')"> 📱 Pack de Ícones</label>
+                    <label><input type="checkbox" onchange="filterByType('widgets')"> ⚙️ Widgets</label>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">📐 Resolução</div>
+                <div class="filter-checkbox">
+                    <label><input type="checkbox" onchange="filterByResolution('4k')"> 🖥️ 4K Ultra HD</label>
+                    <label><input type="checkbox" onchange="filterByResolution('fullhd')"> 📺 Full HD</label>
+                    <label><input type="checkbox" onchange="filterByResolution('mobile')"> 📱 Mobile</label>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">⭐ Avaliação</div>
+                <div class="filter-checkbox">
+                    <label><input type="checkbox" onchange="filterByRating(5)"> ⭐⭐⭐⭐⭐ (5 estrelas)</label>
+                    <label><input type="checkbox" onchange="filterByRating(4)"> ⭐⭐⭐⭐ (4+ estrelas)</label>
+                    <label><input type="checkbox" onchange="filterByRating(3)"> ⭐⭐⭐ (3+ estrelas)</label>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Products Section -->
+        <main class="products-section">
+            <div class="products-header">
+                <h2>🏆 Produtos em Destaque</h2>
+                <select class="sort-select" onchange="sortProducts(this.value)">
+                    <option value="relevancia">Relevância</option>
+                    <option value="menor-preco">Menor Preço</option>
+                    <option value="maior-preco">Maior Preço</option>
+                    <option value="avaliacao">Melhor Avaliação</option>
+                    <option value="mais-vendidos">Mais Vendidos</option>
+                </select>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3>🛒 Seu Carrinho</h3>
+                <button class="close-cart" onclick="toggleCart()">✕</button>
+            </div>
+            <div id="cartItems">
+                <!-- Cart items will be loaded here -->
+            </div>
+            <div class="cart-total">
+                <div class="total-price" id="totalPrice">Total: R$ 0,00</div>
+                <button class="checkout-btn" onclick="checkout()">⚽ Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample products data
+        const products = [
+            {
+                id: 1,
+                name: "Papel de Parede Flamengo 4K",
+                team: "Flamengo",
+                price: 15.99,
+                category: "flamengo",
+                type: "papel-parede",
+                resolution: "4k",
+                rating: 5,
+                image: "🔴",
+                colors: ["#E60026", "#000000"],
+                description: "Papel de parede oficial do Mengão em ultra alta definição"
+            },
+            {
+                id: 2,
+                name: "Tema Completo Corinthians",
+                team: "Corinthians",
+                price: 29.99,
+                category: "corinthians",
+                type: "tema-completo",
+                resolution: "fullhd",
+                rating: 5,
+                image: "⚫",
+                colors: ["#000000", "#FFFFFF"],
+                description: "Tema completo do Timão com ícones e widgets personalizados"
+            },
+            {
+                id: 3,
+                name: "Pack Ícones Palmeiras",
+                team: "Palmeiras",
+                price: 19.99,
+                category: "palmeiras",
+                type: "icones",
+                resolution: "mobile",
+                rating: 4,
+                image: "🟢",
+                colors: ["#006633", "#FFFFFF"],
+                description: "150+ ícones personalizados do Verdão"
+            },
+            {
+                id: 4,
+                name: "Papel de Parede São Paulo Tricolor",
+                team: "São Paulo",
+                price: 17.99,
+                category: "sao-paulo",
+                type: "papel-parede",
+                resolution: "4k",
+                rating: 5,
+                image: "🔴",
+                colors: ["#FF0000", "#000000", "#FFFFFF"],
+                description: "Wallpaper exclusivo do Tricolor Paulista"
+            },
+            {
+                id: 5,
+                name: "Widgets Santos FC",
+                team: "Santos",
+                price: 12.99,
+                category: "santos",
+                type: "widgets",
+                resolution: "mobile",
+                rating: 4,
+                image: "⚫",
+                colors: ["#000000", "#FFFFFF"],
+                description: "Widgets interativos do Peixe para sua tela inicial"
+            },
+            {
+                id: 6,
+                name: "Tema Vasco da Gama Premium",
+                team: "Vasco",
+                price: 24.99,
+                category: "vasco",
+                type: "tema-completo",
+                resolution: "fullhd",
+                rating: 4,
+                image: "⚫",
+                colors: ["#000000", "#FFFFFF"],
+                description: "Tema premium do Gigante da Colina"
+            },
+            {
+                id: 7,
+                name: "Papel de Parede Flamengo Campeão",
+                team: "Flamengo",
+                price: 18.99,
+                category: "flamengo",
+                type: "papel-parede",
+                resolution: "4k",
+                rating: 5,
+                image: "🏆",
+                colors: ["#E60026", "#000000"],
+                description: "Comemore os títulos do Mengão com este wallpaper especial"
+            },
+            {
+                id: 8,
+                name: "Pack Completo Palmeiras Campeão",
+                team: "Palmeiras",
+                price: 39.99,
+                category: "palmeiras",
+                type: "tema-completo",
+                resolution: "4k",
+                rating: 5,
+                image: "🏆",
+                colors: ["#006633", "#FFFFFF"],
+                description: "Pack completo comemorativo do bicampeão da Libertadores"
+            },
+            {
+                id: 9,
+                name: "Ícones Corinthians Fiel",
+                team: "Corinthians",
+                price: 16.99,
+                category: "corinthians",
+                type: "icones",
+                resolution: "mobile",
+                rating: 4,
+                image: "⚫",
+                colors: ["#000000", "#FFFFFF"],
+                description: "Ícones exclusivos para a Fiel Torcida"
+            },
+            {
+                id: 10,
+                name: "Wallpaper Santos Rei do Futebol",
+                team: "Santos",
+                price: 21.99,
+                category: "santos",
+                type: "papel-parede",
+                resolution: "4k",
+                rating: 5,
+                image: "👑",
+                colors: ["#000000", "#FFFFFF"],
+                description: "Homenagem ao Rei Pelé e ao Santos FC"
+            }
+        ];
+
+        let cart = [];
+        let filteredProducts = [...products];
+
+        // Load products on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            displayProducts(products);
+        });
+
+        // Display products
+        function displayProducts(productsToShow) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            productsToShow.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                
+                const colorStripes = product.colors.map(color => 
+                    `<div class="color-stripe" style="background-color: ${color}"></div>`
+                ).join('');
+
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        ${product.image}
+                        <div class="team-colors">${colorStripes}</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-team">${product.team}</div>
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-price">R$ ${product.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                        <div class="product-rating">
+                            ${'⭐'.repeat(product.rating)} (${product.rating}/5)
+                        </div>
+                        <div class="product-specs">
+                            📱 ${product.type.replace('-', ' ')} • 📐 ${product.resolution.toUpperCase()}
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(${product.id})">
+                            ⚽ Adicionar ao Carrinho
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(productCard);
+            });
+        }
+
+        // Add to cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({...product, quantity: 1});
+            }
+
+            updateCartCount();
+            showNotification(`${product.name} adicionado ao carrinho! ⚽`);
+        }
+
+        // Update cart count
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        // Toggle cart modal
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+            if (modal.style.display === 'block') {
+                displayCartItems();
+            }
+        }
+
+        // Display cart items
+        function displayCartItems() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            cartItemsContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align: center; color: #718096;">Seu carrinho está vazio ⚽</p>';
+                document.getElementById('totalPrice').textContent = 'Total: R$ 0,00';
+                return;
+            }
+
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-team">${item.team}</div>
+                        <div class="cart-item-price">R$ ${item.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                    </div>
+                    <div class="quantity-controls">
+                        <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                    </div>
+                    <button class="qty-btn" onclick="removeFromCart(${item.id})" style="background: #fed7d7; color: #e53e3e;">🗑️</button>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+
+            updateTotal();
+        }
+
+        // Update quantity
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    displayCartItems();
+                    updateCartCount();
+                }
+            }
+        }
+
+        // Remove from cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            displayCartItems();
+            updateCartCount();
+        }
+
+        // Update total
+        function updateTotal() {
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('totalPrice').textContent = `Total: R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+        }
+
+        // Filter by category
+        function filterByCategory(category) {
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (category === 'todos') {
+                filteredProducts = [...products];
+            } else {
+                filteredProducts = products.filter(product => product.category === category);
+            }
+            displayProducts(filteredProducts);
+        }
+
+        // Filter by type
+        function filterByType(type) {
+            const filtered = products.filter(product => product.type === type);
+            displayProducts(filtered);
+        }
+
+        // Filter by resolution
+        function filterByResolution(resolution) {
+            const filtered = products.filter(product => product.resolution === resolution);
+            displayProducts(filtered);
+        }
+
+        // Search products
+        function searchProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const searchResults = products.filter(product => 
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.team.toLowerCase().includes(searchTerm) ||
+                product.description.toLowerCase().includes(searchTerm)
+            );
+            displayProducts(searchResults);
+        }
+
+        // Sort products
+        function sortProducts(sortBy) {
+            let sortedProducts = [...filteredProducts];
+            
+            switch(sortBy) {
+                case 'menor-preco':
+                    sortedProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'maior-preco':
+                    sortedProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'avaliacao':
+                    sortedProducts.sort((a, b) => b.rating - a.rating);
+                    break;
+                case 'mais-vendidos':
+                    sortedProducts.sort(() => Math.random() - 0.5);
+                    break;
+                default:
+                    // Keep original order for relevance
+                    break;
+            }
+            
+            displayProducts(sortedProducts);
+        }
+
+        // Apply price filter
+        function applyPriceFilter() {
+            const minPrice = parseFloat(document.getElementById('minPrice').value) || 0;
+            const maxPrice = parseFloat(document.getElementById('maxPrice').value) || Infinity;
+            
+            const filtered = products.filter(product => 
+                product.price >= minPrice && product.price <= maxPrice
+            );
+            
+            displayProducts(filtered);
+        }
+
+        // Filter by rating
+        function filterByRating(minRating) {
+            const filtered = products.filter(product => product.rating >= minRating);
+            displayProducts(filtered);
+        }
+
+        // Checkout
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Seu carrinho está vazio! ⚽');
+                return;
+            }
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            alert(`🏆 Compra finalizada com sucesso!\n\n📦 ${itemCount} item(s) adquirido(s)\n💰 Total: R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n\n⚽ Obrigado por escolher a FutebolWall!\nSeus temas e papéis de parede serão enviados por email em até 24h! 🎉`);
+            
+            // Clear cart
+            cart = [];
+            updateCartCount();
+            toggleCart();
+        }
+
+        // Show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #009639;
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                z-index: 1001;
+                font-weight: bold;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Close cart when clicking outside
+        document.getElementById('cartModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                toggleCart();
+            }
+        });
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchProducts();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'988109828686f18b',t:'MTc1OTM3NDk0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
